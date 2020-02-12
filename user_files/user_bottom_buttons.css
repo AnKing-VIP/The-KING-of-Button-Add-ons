@@ -1,0 +1,80 @@
+/* All buttons at the bottom of the review screen
+   (including the "Edit" and "More" button) */
+button {
+    height: 25px;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    margin: 2px 6px 6px !important;
+    box-shadow: 0px 0px 1.5px .2px #000000!important;
+    -webkit-box-shadow: 0px 0px 1.5px .2px #000000!important;
+}
+.nightMode button {
+    box-shadow: 0px 0px 3px .5px #000000!important;
+    -webkit-box-shadow: 0px 0px 3px .5px #000000!important;
+}
+
+/* the "Show Answer" button */
+#ansbut {
+    width: 120px !important;
+    text-align: center;
+}
+.nightMode #ansbut {
+    background-color: #3a3a3a !important;
+}
+
+/* All rating buttons */
+#middle button {
+    width: 42px;
+    text-align: center !important;
+}
+.nightMode #middle button {
+    background-color: #3a3a3a!important;
+}
+
+/* the "Good" button */
+#defease {
+}
+.nightMode #defease {
+    background-color: #3a3a3a !important;
+}
+
+/* the "Again" button */
+button[onclick*="ease1"]:not(#defease) {
+    text-align: center;
+}
+.nightMode button[onclick*="ease1"]:not(#defease) {
+    background-color: #3a3a3a !important;
+}
+
+/* the "Hard" button */
+button[onclick*="ease2"]:not(#defease) {
+}
+.nightMode button[onclick*="ease2"]:not(#defease) {
+    background-color: #3a3a3a !important;
+}
+
+/* the "Easy" button */
+button[onclick*="ease3"]:not(#defease),
+button[onclick*="ease4"]:not(#defease) {
+}
+.nightMode button[onclick*="ease3"]:not(#defease),
+.nightMode button[onclick*="ease4"]:not(#defease) {
+    background-color: #3a3a3a !important;
+}
+
+/* the "Edit" button */
+button[onclick*="edit"] {
+}
+.nightMode button[onclick*="edit"] {
+    background-color: #3a3a3a !important;
+}
+
+/* the "More" button */
+button[onclick*="more"] {
+}
+.nightMode button[onclick*="more"] {
+    background-color: #3a3a3a !important;
+}
