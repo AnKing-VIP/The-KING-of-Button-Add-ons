@@ -1,10 +1,16 @@
 {
 	"AgainColor": "red",
 	"HardColor": "orange",
-	"GoodColor": "green",
+	"GoodColor": "#30c257",
 	"EasyColor": "#61a8ff",
 	"Nightmode_AgainColor": "#ff6961",
 	"Nightmode_HardColor": "#ffb861",
 	"Nightmode_GoodColor": "#61ffb8",
-	"Nightmode_EasyColor": "#61a8ff"
+	"Nightmode_EasyColor": "#61a8ff",
+	"answer button width": "280",
+	"border radius": "3",
+	"button color": "hover",	
+	"button height": "25",
+	"button width": "42",
+	"style main screen buttons": true
 }
