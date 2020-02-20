@@ -1,4 +1,4 @@
-<div style="color: red; font-size: 16px; background-color: rgb(25, 25, 25); text-align: center;"><br>Restart is requried for any change to take effect<br></div>
+<div style="color: red; font-size: 16px; background-color: rgb(25, 25, 25); text-align: center;"><br>Restart is required for any change to take effect<br></div>
 <hr>
 
 Created by [The AnKing](https://www.ankingmed.com). If you enjoy this add-on or want individualized Anki help, please consider supporting us on **[Patreon](https://www.patreon.com/ankingmed)**, **[YouTube](https://www.youtube.com/theanking)** and **[Instagram](https://www.instagram.com/ankingmed)**/**[Facebook](https://www.facebook.com/ankingmed)** Thanks!
