@@ -1,6 +1,6 @@
 # Button-Colors Redesigned and Customizable
  Button add-on that lets you customize multiple parts of the main screen and answer buttons including colors, size and a confirmation tooltip.
-<p align="center"><img src="screenshots/ButtonAdd-on.png" height=400></p>
+<p align="center"><img src="screenshots/ButtonAdd-on.jpg" height=400></p>
 
 See this link for Ankiweb download and details: 
  
