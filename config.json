@@ -7,10 +7,14 @@
 	"Nightmode_HardColor": "#ffb861",
 	"Nightmode_GoodColor": "#61ffb8",
 	"Nightmode_EasyColor": "#61a8ff",
-	"answer button width": "280",
+	"answer button width": "Full",
 	"border radius": "3",
 	"button color": "hover",	
-	"button height": "25",
-	"button width": "42",
+	"button height": "S",
+	"button width": "S",
+	"confirmation": true,
+	"confirmation time": 300,
+	"confirmation x-offset": 0,
+	"confirmation y-offset": 0,
 	"style main screen buttons": true
 }

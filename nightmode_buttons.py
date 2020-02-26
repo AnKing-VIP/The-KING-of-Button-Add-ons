@@ -27,10 +27,31 @@ else:
     from aqt.theme import theme_manager
 
 #Main config options
-HEIGHT = getUserOption("button height")
 BORDERRADIUS = getUserOption("border radius")
-ANSWERWIDTH = getUserOption("answer button width")
-WIDTH = getUserOption("button width")
+if getUserOption("answer button width") == "Full":
+    if getUserOption("button width") == "S":
+        ANSWERWIDTH = 280
+    elif getUserOption("button width") == "M":
+        ANSWERWIDTH = 380
+    elif getUserOption("button width") == "L":
+        ANSWERWIDTH = 530
+else:
+    ANSWERWIDTH = 120
+
+if getUserOption("button width") == "S":
+    WIDTH = 42
+elif getUserOption("button width") == "M":
+    WIDTH = 82
+elif getUserOption("button width") == "L":
+    WIDTH = 122
+
+if getUserOption("button height") == "S":
+    HEIGHT = 25
+elif getUserOption("button height") == "M":
+    HEIGHT = 40
+elif getUserOption("button height") == "L":
+    HEIGHT = 60
+
 if getUserOption("button color") == "colors":
     if theme_manager.night_mode:
         AGAINBUTTON = getUserOption("Nightmode_AgainColor")
@@ -161,7 +182,6 @@ button {
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: %spx!important;
     -webkit-appearance: none;
-    outline: none;
     cursor: pointer;
     margin: 2px 6px 6px !important;
     box-shadow: 0px 0px 1.5px .2px #000000!important;

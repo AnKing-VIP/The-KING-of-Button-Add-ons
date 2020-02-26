@@ -44,7 +44,6 @@ if getUserOption("style main screen buttons", True):
         border: solid 1px rgba(0, 0, 0, 0.2);
         border-radius: %spx!important;
         -webkit-appearance: none;
-        outline: none;
         cursor: pointer;
         margin: 2px 6px 6px !important;
         box-shadow: 0px 0px 1.5px .2px #000000!important;
