@@ -32,7 +32,7 @@ if getUserOption("answer button width") == "Full":
     if getUserOption("button width") == "S":
         ANSWERWIDTH = 280
     elif getUserOption("button width") == "M":
-        ANSWERWIDTH = 380
+        ANSWERWIDTH = 375
     elif getUserOption("button width") == "L":
         ANSWERWIDTH = 530
 else:
@@ -121,6 +121,29 @@ if getUserOption("button color") == "hover":
 else:
     HOVEREFFECT = ""
 
+if getUserOption("button font size") == "S":
+    FONTSIZE = ""
+elif getUserOption("button font size") == "M":
+    FONTSIZE = '''
+    #defease, #ansbut,
+    button[onclick*="ease1"]:not(#defease), 
+    button[onclick*="ease2"]:not(#defease),
+    button[onclick*="ease3"]:not(#defease),
+    button[onclick*="ease4"]:not(#defease), 
+    button[onclick*="edit"],
+    button[onclick*="more"] { font-size: 16px; } 
+    '''
+elif getUserOption("button font size") == "L":
+    FONTSIZE = '''
+    #defease, #ansbut,
+    button[onclick*="ease1"]:not(#defease), 
+    button[onclick*="ease2"]:not(#defease),
+    button[onclick*="ease3"]:not(#defease),
+    button[onclick*="ease4"]:not(#defease), 
+    button[onclick*="edit"],
+    button[onclick*="more"] { font-size: 20px; } 
+    '''    
+
 #add colors to the text and black for 'colors' mode
 if getUserOption("button color") != "colors":
     if theme_manager.night_mode:
@@ -207,36 +230,44 @@ button {
 /* the "Good" button */
 #defease {
     background-color: %s!important;
+    text-align: center;
 }
 
 /* the "Again" button */
 button[onclick*="ease1"]:not(#defease) {
     text-align: center;
     background-color: %s!important;
+    text-align: center;
 }
 
 /* the "Hard" button */
 button[onclick*="ease2"]:not(#defease) {
     background-color: %s!important;
+    text-align: center;
 }
 
 /* the "Easy" button */
 button[onclick*="ease3"]:not(#defease),
 button[onclick*="ease4"]:not(#defease) {
     background-color: %s!important;
+    text-align: center;
 }
 
 /* the "Edit" button */
 button[onclick*="edit"] {
+    text-align: center;
+
 }
 
 /* the "More" button */
 button[onclick*="more"] {
+    text-align: center;
 }
 
 %s
 %s
-''' % (HEIGHT, BORDERRADIUS, ANSWERWIDTH, WIDTH, GOODBUTTON, AGAINBUTTON, HARDBUTTON, EASYBUTTON, HOVEREFFECT, CARDCOLOR))
+%s
+''' % (HEIGHT, BORDERRADIUS, ANSWERWIDTH, WIDTH, GOODBUTTON, AGAINBUTTON, HARDBUTTON, EASYBUTTON, HOVEREFFECT, CARDCOLOR, FONTSIZE))
 
 
 

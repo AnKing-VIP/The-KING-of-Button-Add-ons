@@ -41,11 +41,11 @@ def tooltipWithColour(msg, color, x=0, y=20, xref=1, period=3000, parent=None, w
     closeTooltip()
     aw = parent or aqt.mw.app.activeWindow() or aqt.mw
     lab = CustomLabel("""\
-<table cellpadding=1>
+<center><table cellpadding=1>
 <tr>
 <td>%s</td>
 </tr>
-</table>""" % msg, aw)
+</table></center>""" % msg, aw)
     lab.setFrameStyle(QFrame.Panel)
     lab.setLineWidth(0)
     lab.setWindowFlags(Qt.ToolTip)
@@ -95,24 +95,18 @@ def answerCard_before(self, ease) :
         x3 = 25 + 7 + getUserOption("confirmation x-offset")
         x4 = 100 + 7 + getUserOption("confirmation x-offset")
         width = 62
-        THREESPACE = "&nbsp;&nbsp;&nbsp;"
-        FOURSPACE = "&nbsp;&nbsp;&nbsp;&nbsp;"
     elif getUserOption("button width") == "M":
-        x1 = -160 + 7 + getUserOption("confirmation x-offset")
-        x2 = -62 + 7 + getUserOption("confirmation x-offset")
-        x3 = 36 + 7 + getUserOption("confirmation x-offset")
-        x4 = 135 + 7 + getUserOption("confirmation x-offset")
-        width = 87
-        THREESPACE = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-        FOURSPACE = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"        
+        x1 = -162 + 7 + getUserOption("confirmation x-offset")
+        x2 = -65.33 + 7 + getUserOption("confirmation x-offset")
+        x3 = 31.33 + 7 + getUserOption("confirmation x-offset")
+        x4 = 128 + 7 + getUserOption("confirmation x-offset")
+        width = 87      
     elif getUserOption("button width") == "L":
-        x1 = -218 + 7 + getUserOption("confirmation x-offset")
-        x2 = -82 + 7 + getUserOption("confirmation x-offset")
-        x3 = 54 + 7 + getUserOption("confirmation x-offset")
-        x4 = 190 + 7 + getUserOption("confirmation x-offset")
+        x1 = -224 + 7 + getUserOption("confirmation x-offset")
+        x2 = -88.66 + 7 + getUserOption("confirmation x-offset")
+        x3 = 46.66 + 7 + getUserOption("confirmation x-offset")
+        x4 = 182 + 7 + getUserOption("confirmation x-offset")
         width = 125                
-        THREESPACE = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-        FOURSPACE = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 
     if getUserOption("button height") == "S":   
         height = 26
@@ -165,18 +159,25 @@ def answerCard_before(self, ease) :
         GoodColor = getUserOption("GoodColor")
         EasyColor = getUserOption("EasyColor")                        
 
-    # show tooltip in according color
+    #set font size options
+    if getUserOption("button font size") == "S":
+        FONTSIZE = ""
+    elif getUserOption("button font size") == "M":
+        FONTSIZE = "font-size: 16px;"
+    elif getUserOption("button font size") == "L":
+        FONTSIZE = "font-size: 20px;"
 
+    # show tooltip in according color
     if len(cB) > 0 :
         # display the tooltip in an according color
         if (cB[0][1]=="Again" or "Again" in cB[0][1]):
-            utils.tooltipWithColour(("<div style='color:#3a3a3a;'>%sAgain</div>" % THREESPACE), AgainColor, x=x1, y=y, xref=xref, period=time, width=width, height=height)
+            utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Again</div>" % (FONTSIZE)), AgainColor, x=x1, y=y, xref=xref, period=time, width=width, height=height)
         elif (cB[0][1]=="Hard" or "Hard" in cB[0][1]):
-            utils.tooltipWithColour(("<div style='color:#3a3a3a;'>%sHard</div>" % FOURSPACE), HardColor, x=x2, y=y, xref=xref, period=time, width=width, height=height)
+            utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Hard</div>" % (FONTSIZE)), HardColor, x=x2, y=y, xref=xref, period=time, width=width, height=height)
         elif (cB[0][1]=="Good" or "Good" in cB[0][1]):
-            utils.tooltipWithColour(("<div style='color:#3a3a3a;'>%sGood</div>" % THREESPACE), GoodColor, x=x3, y=y, xref=xref, period=time, width=width, height=height)
+            utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Good</div>" % (FONTSIZE)), GoodColor, x=x3, y=y, xref=xref, period=time, width=width, height=height)
         elif (cB[0][1]=="Easy" or "Easy" in cB[0][1]):
-            utils.tooltipWithColour(("<div style='color:#3a3a3a;'>%sEasy</div>" % FOURSPACE), EasyColor, x=x4, y=y, xref=xref, period=time, width=width, height=height)
+            utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Easy</div>" % (FONTSIZE)), EasyColor, x=x4, y=y, xref=xref, period=time, width=width, height=height)
         else:
             # default behavior for unforeseen cases
             tooltip(cB[0][1])
