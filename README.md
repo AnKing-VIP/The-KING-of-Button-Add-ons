@@ -1,6 +1,6 @@
 # The KING of Button Add-ons
  Button add-on that lets you customize multiple parts of the main screen and answer buttons including colors, size and a confirmation tooltip.
-<p align="center"><img src="screenshots/ButtonAdd-on.jpg" width=800><img src="screenshots/ButtonsConfirmation.gif" width=800></p>
+<p align="center"><img src="screenshots/ButtonAdd-on.jpg" width=800><img src="screenshots/Font-size.jpg" width=800><img src="screenshots/ButtonsConfirmation.gif" width=800></p>
 
 See this link for Ankiweb download and details: 
  
