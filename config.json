@@ -14,7 +14,7 @@
 	"button height": "S",
 	"button width": "S",
 	"confirmation": true,
-	"confirmation time": 300,
+	"confirmation time": 450,
 	"confirmation x-offset": 0,
 	"confirmation y-offset": 0,
 	"style main screen buttons": true
