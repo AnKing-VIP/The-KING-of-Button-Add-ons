@@ -16,16 +16,6 @@ import shutil
 from .config import getUserOption
 from .nmcheck import isnightmode
 
-# Nightmode
-from anki import version as anki_version
-old_anki = tuple(int(i) for i in anki_version.split(".")) < (2, 1, 20)
-if old_anki:
-    class Object():
-        pass
-    theme_manager = Object()
-    theme_manager.night_mode = False
-else:
-    from aqt.theme import theme_manager
 
 #Main config options
 BORDERRADIUS = getUserOption("border radius")
