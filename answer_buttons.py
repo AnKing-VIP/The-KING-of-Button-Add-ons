@@ -119,6 +119,7 @@ if getUserOption("button color") == "hover":
         "TEXT":TEXT,
     }
 
+
 if getUserOption("button font size") == "S":
     FONTSIZE = ""
 elif getUserOption("button font size") == "M":
@@ -144,6 +145,9 @@ elif getUserOption("button font size") == "L":
 
 
 #set font color (when background is colored the font must be black)
+if getUserOption("button color") == "colors":
+    GOODCOLOR = AGAINCOLOR = HARDCOLOR = EASYCOLOR = "#3a3a3a"
+else:
     if isnightmode():
         AGAINCOLOR = getUserOption("Nightmode_AgainColor")
         HARDCOLOR = getUserOption("Nightmode_HardColor")
@@ -154,93 +158,65 @@ elif getUserOption("button font size") == "L":
         HARDCOLOR = getUserOption("HardColor")
         GOODCOLOR = getUserOption("GoodColor")
         EASYCOLOR = getUserOption("EasyColor")
-else:
-    GOODCOLOR = AGAINCOLOR = HARDCOLOR = EASYCOLOR = "#3a3a3a"
-CARDCOLOR = '''
-/* the "Good" button */
-#defease {
-    color: %s!important;
-}      
-    }      
-}      
-/* the "Again" button */
-button[onclick*="ease1"]:not(#defease) {
-    color: %s!important;
-}    
-    }    
-}    
-/* the "Hard" button */
-button[onclick*="ease2"]:not(#defease) {
-    color: %s!important;  
-        color: %s!important;  
-    color: %s!important;  
-}
-/* the "Easy" button */
-button[onclick*="ease3"]:not(#defease),
-button[onclick*="ease4"]:not(#defease) {
-    color: %s!important;
-}                     
-    }                     
-}                     
-''' % (GOODCOLOR, AGAINCOLOR, HARDCOLOR, EASYCOLOR)
-
-
 
 
 #main css
-bottom_buttons_css = ('''
+bottom_buttons_css = """
 /* All buttons at the bottom of the review screen
    (including the "Edit" and "More" button) */
 button {
-    height: %spx;
+    height: %(HEIGHT)spx;
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: %spx!important;
+    border-radius: %(BORDERRADIUS)spx !important;
     -webkit-appearance: none;
     cursor: pointer;
     margin: 2px 6px 6px !important;
-    box-shadow: 0px 0px 1.5px .2px #000000!important;
-    -webkit-box-shadow: 0px 0px 1.5px .2px #000000!important;
+    box-shadow: 0px 0px 1.5px .2px #000000 !important;
+    -webkit-box-shadow: 0px 0px 1.5px .2px #000000 !important;
 }
 .nightMode button {
-    box-shadow: 0px 0px 2.5px .5px #000000!important;
-    -webkit-box-shadow: 0px 0px 2.5px .5px #000000!important;
-    background-color: #3a3a3a!important;
+    box-shadow: 0px 0px 2.5px .5px #000000 !important;
+    -webkit-box-shadow: 0px 0px 2.5px .5px #000000 !important;
+    background: #656565 !important;
 }
 
 /* the "Show Answer" button */
 #ansbut {
-    width: %spx !important;
+    width: %(ANSWERWIDTH)spx !important;
     text-align: center;
 }
 /* All rating buttons */
 #middle button {
-    width: %spx;
+    width: %(WIDTH)spx;
     text-align: center !important;
 }
 
 /* the "Good" button */
 #defease {
-    background-color: %s!important;
+    color: %(GOODCOLOR)s !important;
+    background-color: %(GOODBUTTON)s !important;
     text-align: center;
 }
 
 /* the "Again" button */
 button[onclick*="ease1"]:not(#defease) {
-    text-align: center;
-    background-color: %s!important;
+    color: %(AGAINCOLOR)s !important;
+    background-color: %(AGAINBUTTON)s !important;
     text-align: center;
 }
 
 /* the "Hard" button */
 button[onclick*="ease2"]:not(#defease) {
-    background-color: %s!important;
+    color: %(HARDCOLOR)s !important;
+    background-color: %(HARDBUTTON)s !important;
     text-align: center;
 }
 
 /* the "Easy" button */
 button[onclick*="ease3"]:not(#defease),
 button[onclick*="ease4"]:not(#defease) {
-    background-color: %s!important;
+    color: %(EASYCOLOR)s !important;
+    background-color: %(EASYBUTTON)s !important;
     text-align: center;
 }
 
@@ -255,10 +231,23 @@ button[onclick*="more"] {
     text-align: center;
 }
 
-%s
-%s
-%s
-''' % (HEIGHT, BORDERRADIUS, ANSWERWIDTH, WIDTH, GOODBUTTON, AGAINBUTTON, HARDBUTTON, EASYBUTTON, HOVEREFFECT, CARDCOLOR, FONTSIZE))
+%(HOVEREFFECT)s
+%(FONTSIZE)s""" % {
+    "HEIGHT": HEIGHT,
+    "BORDERRADIUS": BORDERRADIUS,
+    "ANSWERWIDTH": ANSWERWIDTH,
+    "WIDTH": WIDTH,
+    "GOODCOLOR": GOODCOLOR,
+    "AGAINCOLOR": AGAINCOLOR,
+    "HARDCOLOR": HARDCOLOR,
+    "EASYCOLOR": EASYCOLOR,
+    "GOODBUTTON": GOODBUTTON,
+    "AGAINBUTTON": AGAINBUTTON,
+    "HARDBUTTON": HARDBUTTON,
+    "EASYBUTTON": EASYBUTTON,
+    "HOVEREFFECT": HOVEREFFECT,
+    "FONTSIZE": FONTSIZE,
+}
 
 
 
@@ -268,6 +257,4 @@ js_append_css = f"$('head').append(`<style>{bottom_buttons_css}</style>`);"
 
 def reviewer_initWeb_wrapper(*args, **kwargs):
     mw.reviewer.bottom.web.eval(js_append_css)
-
-
 Reviewer._initWeb = wrap(Reviewer._initWeb, reviewer_initWeb_wrapper)
