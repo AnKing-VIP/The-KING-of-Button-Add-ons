@@ -11,14 +11,15 @@
 from anki.hooks import wrap
 from aqt import mw
 from aqt.reviewer import Reviewer
-import os
-import shutil
+
 from .config import getUserOption
 from .nmcheck import isnightmode
 
 
 #Main config options
 BORDERRADIUS = getUserOption("border radius")
+
+
 if getUserOption("answer button width") == "Full":
     if getUserOption("button width") == "S":
         ANSWERWIDTH = 280
@@ -29,12 +30,14 @@ if getUserOption("answer button width") == "Full":
 else:
     ANSWERWIDTH = 120
 
+
 if getUserOption("button width") == "S":
     WIDTH = 42
 elif getUserOption("button width") == "M":
     WIDTH = 82
 elif getUserOption("button width") == "L":
     WIDTH = 122
+
 
 if getUserOption("button height") == "S":
     HEIGHT = 25
@@ -43,6 +46,8 @@ elif getUserOption("button height") == "M":
 elif getUserOption("button height") == "L":
     HEIGHT = 60
 
+
+# set background color of buttons
 if getUserOption("button color") == "colors":
     if isnightmode():
         AGAINBUTTON = getUserOption("Nightmode_AgainColor")
@@ -64,8 +69,10 @@ else:
         AGAINBUTTON = "#fff"
         HARDBUTTON = "#fff"
         GOODBUTTON = "#fff"
-        EASYBUTTON = "#fff"        
-#add hover effects
+        EASYBUTTON = "#fff"
+
+
+# add hover effects
 if getUserOption("button color") == "hover":
     if isnightmode():
         AGAINHOVER = getUserOption("Nightmode_AgainColor")
@@ -135,6 +142,8 @@ elif getUserOption("button font size") == "L":
     button[onclick*="more"] { font-size: 20px; } 
     '''    
 
+
+#set font color (when background is colored the font must be black)
     if isnightmode():
         AGAINCOLOR = getUserOption("Nightmode_AgainColor")
         HARDCOLOR = getUserOption("Nightmode_HardColor")

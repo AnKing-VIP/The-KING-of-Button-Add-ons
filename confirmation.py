@@ -3,16 +3,15 @@ This is a modification of the Answer Confirmation add-on for Anki by Albert Lyub
 I do not take credit for any of the original code.
 
 License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
-
 """
-__version__ = "1.5"
 
+
+from anki.hooks import wrap
+import aqt
 from aqt.reviewer import Reviewer
-from aqt.utils import *
+from aqt.utils import tooltip
 from aqt import utils
 from aqt.qt import *
-import aqt
-from anki.hooks import wrap
 from .config import getUserOption
 from .nmcheck import isnightmode
 
@@ -131,7 +130,6 @@ def answerCard_before(self, ease) :
     
     if (x1 < 0):
         x1 = 0
-    
     if (y < 0):
         y = 0
 
@@ -168,6 +166,7 @@ def answerCard_before(self, ease) :
         else:
             # default behavior for unforeseen cases
             tooltip(cB[0][1])
+
 
 if getUserOption("confirmation", True):
     Reviewer._answerCard  = wrap(Reviewer._answerCard, answerCard_before, "before")

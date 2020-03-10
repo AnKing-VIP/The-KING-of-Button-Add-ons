@@ -1,11 +1,15 @@
+
 from aqt.toolbar import BottomBar
 import aqt.editor
-from aqt.editor import Editor, EditorWebView
+from aqt.editor import Editor
+
+
 from .config import getUserOption
 from .nmcheck import isnightmode
 
 
 BORDERRADIUS = getUserOption("border radius")
+
 
 #add hover effects
 if getUserOption("button color") == "hover":
@@ -24,6 +28,7 @@ if getUserOption("button color") == "hover":
     ''' % (BACKGROUND, TEXT))
 else:
     HOVEREFFECT = ""        
+
 
 if getUserOption("style main screen buttons", True):
     BottomBar._centerBody = (""" 
