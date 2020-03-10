@@ -1,4 +1,4 @@
-﻿"""
+"""
 This is a modification of the Answer Confirmation add-on for Anki by Albert Lyubarsky
 I do not take credit for any of the original code.
 
@@ -14,9 +14,7 @@ from aqt.qt import *
 import aqt
 from anki.hooks import wrap
 from .config import getUserOption
-
-# init configuration
-Reviewer.colConfConf = aqt.mw.addonManager.getConfig(__name__)
+from .nmcheck import isnightmode
 
 # custom method for deleting the tooltip, since there were problems
 # with the handling of global variables by an add-on
@@ -136,19 +134,8 @@ def answerCard_before(self, ease) :
     
     if (y < 0):
         y = 0
-    
-    # Nightmode
-    from anki import version as anki_version
-    old_anki = tuple(int(i) for i in anki_version.split(".")) < (2, 1, 20)
-    if old_anki:
-        class Object():
-            pass
-        theme_manager = Object()
-        theme_manager.night_mode = False
-    else:
-        from aqt.theme import theme_manager
 
-    if theme_manager.night_mode:
+    if isnightmode():
         AgainColor = getUserOption("Nightmode_AgainColor")
         HardColor = getUserOption("Nightmode_HardColor")
         GoodColor = getUserOption("Nightmode_GoodColor")

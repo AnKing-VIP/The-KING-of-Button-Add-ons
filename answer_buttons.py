@@ -14,6 +14,7 @@ from aqt.reviewer import Reviewer
 import os
 import shutil
 from .config import getUserOption
+from .nmcheck import isnightmode
 
 # Nightmode
 from anki import version as anki_version
@@ -53,7 +54,7 @@ elif getUserOption("button height") == "L":
     HEIGHT = 60
 
 if getUserOption("button color") == "colors":
-    if theme_manager.night_mode:
+    if isnightmode():
         AGAINBUTTON = getUserOption("Nightmode_AgainColor")
         HARDBUTTON = getUserOption("Nightmode_HardColor")
         GOODBUTTON = getUserOption("Nightmode_GoodColor")
@@ -64,7 +65,7 @@ if getUserOption("button color") == "colors":
         GOODBUTTON = getUserOption("GoodColor")
         EASYBUTTON = getUserOption("EasyColor")            
 else:
-    if theme_manager.night_mode:
+    if isnightmode():
         AGAINBUTTON = "inherit"
         HARDBUTTON = "inherit"
         GOODBUTTON = "inherit"
@@ -76,7 +77,7 @@ else:
         EASYBUTTON = "#fff"        
 #add hover effects
 if getUserOption("button color") == "hover":
-    if theme_manager.night_mode:
+    if isnightmode():
         AGAINHOVER = getUserOption("Nightmode_AgainColor")
         HARDHOVER = getUserOption("Nightmode_HardColor")
         GOODHOVER = getUserOption("Nightmode_GoodColor")
@@ -144,9 +145,7 @@ elif getUserOption("button font size") == "L":
     button[onclick*="more"] { font-size: 20px; } 
     '''    
 
-#add colors to the text and black for 'colors' mode
-if getUserOption("button color") != "colors":
-    if theme_manager.night_mode:
+    if isnightmode():
         AGAINCOLOR = getUserOption("Nightmode_AgainColor")
         HARDCOLOR = getUserOption("Nightmode_HardColor")
         GOODCOLOR = getUserOption("Nightmode_GoodColor")

@@ -2,23 +2,14 @@ from aqt.toolbar import BottomBar
 import aqt.editor
 from aqt.editor import Editor, EditorWebView
 from .config import getUserOption
+from .nmcheck import isnightmode
 
-# Nightmode
-from anki import version as anki_version
-old_anki = tuple(int(i) for i in anki_version.split(".")) < (2, 1, 20)
-if old_anki:
-    class Object():
-        pass
-    theme_manager = Object()
-    theme_manager.night_mode = False
-else:
-    from aqt.theme import theme_manager
 
 BORDERRADIUS = getUserOption("border radius")
 
 #add hover effects
 if getUserOption("button color") == "hover":
-    if theme_manager.night_mode:
+    if isnightmode():
         TEXT = "#3a3a3a"
         BACKGROUND = "#c0c0c0"   
     else:
