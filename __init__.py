@@ -6,7 +6,7 @@
 ### Instagram/Facebook: @ankingmed
 ### Patreon: https://www.patreon.com/ankingmed (Get individualized help)
 
-from . import nightmode_buttons
+from . import answer_buttons
 from . import bottom_main_buttons
 from . import custom_tooltip
 from . import confirmation
