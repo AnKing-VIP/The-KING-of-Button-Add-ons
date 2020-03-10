@@ -150,51 +150,44 @@ if getUserOption("button color") != "colors":
         AGAINCOLOR = getUserOption("Nightmode_AgainColor")
         HARDCOLOR = getUserOption("Nightmode_HardColor")
         GOODCOLOR = getUserOption("Nightmode_GoodColor")
-        EASYCOLOR = getUserOption("Nightmode_EasyColor")      
+        EASYCOLOR = getUserOption("Nightmode_EasyColor")
     else:
         AGAINCOLOR = getUserOption("AgainColor")
         HARDCOLOR = getUserOption("HardColor")
         GOODCOLOR = getUserOption("GoodColor")
-        EASYCOLOR = getUserOption("EasyColor")            
-    CARDCOLOR = ('''
-    /* the "Good" button */
-    #defease {
-        color: %s!important;
-    }      
-    /* the "Again" button */
-    button[onclick*="ease1"]:not(#defease) {
-        color: %s!important;
-    }    
-    /* the "Hard" button */
-    button[onclick*="ease2"]:not(#defease) {
-        color: %s!important;  
-    }
-    /* the "Easy" button */
-    button[onclick*="ease3"]:not(#defease),
-    button[onclick*="ease4"]:not(#defease) {
-        color: %s!important;
-    }                     
-    ''' % (GOODCOLOR, AGAINCOLOR, HARDCOLOR, EASYCOLOR))
+        EASYCOLOR = getUserOption("EasyColor")
 else:
-    CARDCOLOR = '''
-    /* the "Good" button */
-    #defease {
-        color: #3a3a3a!important;
+    GOODCOLOR = AGAINCOLOR = HARDCOLOR = EASYCOLOR = "#3a3a3a"
+CARDCOLOR = '''
+/* the "Good" button */
+#defease {
+    color: %s!important;
+}      
     }      
-    /* the "Again" button */
-    button[onclick*="ease1"]:not(#defease) {
-        color: #3a3a3a!important;
+}      
+/* the "Again" button */
+button[onclick*="ease1"]:not(#defease) {
+    color: %s!important;
+}    
     }    
-    /* the "Hard" button */
-    button[onclick*="ease2"]:not(#defease) {
-        color: #3a3a3a!important; 
-    }           
-    /* the "Easy" button */
-    button[onclick*="ease3"]:not(#defease),
-    button[onclick*="ease4"]:not(#defease) {
-        color: #3a3a3a!important;
-    }      
-    '''
+}    
+/* the "Hard" button */
+button[onclick*="ease2"]:not(#defease) {
+    color: %s!important;  
+        color: %s!important;  
+    color: %s!important;  
+}
+/* the "Easy" button */
+button[onclick*="ease3"]:not(#defease),
+button[onclick*="ease4"]:not(#defease) {
+    color: %s!important;
+}                     
+    }                     
+}                     
+''' % (GOODCOLOR, AGAINCOLOR, HARDCOLOR, EASYCOLOR)
+
+
+
 
 #main css
 bottom_buttons_css = ('''
