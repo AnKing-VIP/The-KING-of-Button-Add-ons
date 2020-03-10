@@ -1,4 +1,4 @@
-import sys
+# -*- coding: utf-8 -*-
 
 from aqt import mw
 from aqt.utils import showWarning

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 from aqt.toolbar import BottomBar
 import aqt.editor
