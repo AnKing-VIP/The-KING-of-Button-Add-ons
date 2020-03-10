@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 
 """
 This is a modification of the Answer Confirmation add-on for Anki by Albert Lyubarsky
