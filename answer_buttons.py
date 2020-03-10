@@ -67,6 +67,7 @@ else:
 
 
 # add hover effects
+HOVEREFFECT = ""
 if getUserOption("button color") == "hover":
     if isnightmode():
         AGAINHOVER = getUserOption("Nightmode_AgainColor")
@@ -83,35 +84,40 @@ if getUserOption("button color") == "hover":
         TEXT = "#c0c0c0"
         BACKGROUND = "#3a3a3a"         
                 
-    HOVEREFFECT = ('''
+    HOVEREFFECT = '''
     /* the "Good" button */  
     #defease:hover {
-        background-color: %s!important;
+        background-color: %(GOODHOVER)s!important;
         color: #3a3a3a!important;
     }    
     button[onclick*="ease1"]:not(#defease):hover {
-        background-color: %s!important;
+        background-color: %(AGAINHOVER)s!important;
         color: #3a3a3a!important;
     }   
     button[onclick*="ease2"]:not(#defease):hover {
-        background-color: %s!important;
+        background-color: %(HARDHOVER)s!important;
         color: #3a3a3a!important;        
     }  
     button[onclick*="ease3"]:not(#defease):hover,
     button[onclick*="ease4"]:not(#defease):hover {
-        background-color: %s!important;
+        background-color: %(EASYHOVER)s!important;
         color: #3a3a3a!important;
     }  
     /* the "Edit", "More" and "Answer" buttons */
     button[onclick*="edit"]:hover, 
     button[onclick*="more"]:hover,
     #ansbut:hover {
-        background-color: %s!important;
-        color: %s!important;
+        background-color: %(BACKGROUND)s!important;
+        color: %(TEXT)s!important;
     }    
-    ''' % (GOODHOVER, AGAINHOVER, HARDHOVER, EASYHOVER, BACKGROUND, TEXT))
-else:
-    HOVEREFFECT = ""
+    ''' % {
+        "GOODHOVER":GOODHOVER,
+        "AGAINHOVER":AGAINHOVER,
+        "HARDHOVER":HARDHOVER,
+        "EASYHOVER":EASYHOVER,
+        "BACKGROUND":BACKGROUND,
+        "TEXT":TEXT,
+    }
 
 if getUserOption("button font size") == "S":
     FONTSIZE = ""
