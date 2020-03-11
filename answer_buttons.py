@@ -255,7 +255,10 @@ button[onclick*="more"] {
 # add css
 js_append_css = f"$('head').append(`<style>{bottom_buttons_css}</style>`);"
 
+def reviewer_initWeb_wrapper(func):
+    def _initWeb(*args, **kwargs):
+        func(*args, **kwargs)
+        mw.reviewer.bottom.web.eval(js_append_css)
+    return _initWeb
 
-def reviewer_initWeb_wrapper(*args, **kwargs):
-    mw.reviewer.bottom.web.eval(js_append_css)
-Reviewer._initWeb = wrap(Reviewer._initWeb, reviewer_initWeb_wrapper)
+mw.reviewer._initWeb = reviewer_initWeb_wrapper(mw.reviewer._initWeb)
