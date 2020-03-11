@@ -98,7 +98,8 @@ def answerCard_before(self, ease) :
         FONTSIZE = "font-size: 20px;"
 
     # show tooltip in according color
-    if len(cB) > 0 :
+    # if len(cB) > 0 : #save this line for testing purposes
+    if self.state == "answer" and len(cB) > 0 :    
         # display the tooltip in an according color
         if (cB[0][1]=="Again" or "Again" in cB[0][1]):
             utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Again</div>" % (FONTSIZE)), AgainColor, x=x1, y=y, xref=xref, period=time, width=width, height=height)
