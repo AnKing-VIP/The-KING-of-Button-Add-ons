@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Config code written by Arthur Milchior
 
 from aqt import mw
 from aqt.utils import showWarning
