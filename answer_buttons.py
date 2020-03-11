@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# refined thanks to ijgnord
 
 #TODO add font-weight? 
 
@@ -177,7 +178,7 @@ button {
 .nightMode button {
     box-shadow: 0px 0px 2.5px .5px #000000 !important;
     -webkit-box-shadow: 0px 0px 2.5px .5px #000000 !important;
-    background: #656565 !important;
+    background: #3a3a3a !important;
 }
 
 /* the "Show Answer" button */
