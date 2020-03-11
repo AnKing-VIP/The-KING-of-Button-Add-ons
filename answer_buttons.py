@@ -15,31 +15,31 @@ from .nmcheck import isnightmode
 BORDERRADIUS = getUserOption("border radius")
 
 
-if getUserOption("answer button width") == "Full":
-    if getUserOption("button width") == "S":
-        ANSWERWIDTH = 280
-    elif getUserOption("button width") == "M":
-        ANSWERWIDTH = 375
-    elif getUserOption("button width") == "L":
+if getUserOption("answer button width") == "full":
+    if getUserOption("button width") == "l":
         ANSWERWIDTH = 530
+    elif getUserOption("button width") == "m":
+        ANSWERWIDTH = 375
+    else:
+        ANSWERWIDTH = 280
 else:
     ANSWERWIDTH = 120
 
 
-if getUserOption("button width") == "S":
-    WIDTH = 42
-elif getUserOption("button width") == "M":
-    WIDTH = 82
-elif getUserOption("button width") == "L":
+if getUserOption("button width") == "l":
     WIDTH = 122
+elif getUserOption("button width") == "m":
+    WIDTH = 82
+else:  # getUserOption("button width") == "s" OR other cases
+    WIDTH = 42
 
 
-if getUserOption("button height") == "S":
-    HEIGHT = 25
-elif getUserOption("button height") == "M":
-    HEIGHT = 40
-elif getUserOption("button height") == "L":
+if getUserOption("button height") == "l":
     HEIGHT = 60
+elif getUserOption("button height") == "m":
+    HEIGHT = 40
+else:  #  getUserOption("button height") == "s" OR other cases
+    HEIGHT = 25
 
 
 # set background color of buttons
@@ -56,15 +56,9 @@ if getUserOption("button color") == "colors":
         EASYBUTTON = getUserOption("EasyColor")            
 else:
     if isnightmode():
-        AGAINBUTTON = "inherit"
-        HARDBUTTON = "inherit"
-        GOODBUTTON = "inherit"
-        EASYBUTTON = "inherit"
+        AGAINBUTTON = HARDBUTTON = GOODBUTTON = EASYBUTTON = "inherit"
     else:
-        AGAINBUTTON = "#fff"
-        HARDBUTTON = "#fff"
-        GOODBUTTON = "#fff"
-        EASYBUTTON = "#fff"
+        AGAINBUTTON = HARDBUTTON = GOODBUTTON = EASYBUTTON = "#fff"
 
 
 # add hover effects
@@ -112,37 +106,30 @@ if getUserOption("button color") == "hover":
         color: %(TEXT)s!important;
     }    
     ''' % {
-        "GOODHOVER":GOODHOVER,
-        "AGAINHOVER":AGAINHOVER,
-        "HARDHOVER":HARDHOVER,
-        "EASYHOVER":EASYHOVER,
-        "BACKGROUND":BACKGROUND,
-        "TEXT":TEXT,
+        "GOODHOVER": GOODHOVER,
+        "AGAINHOVER": AGAINHOVER,
+        "HARDHOVER": HARDHOVER,
+        "EASYHOVER": EASYHOVER,
+        "BACKGROUND": BACKGROUND,
+        "TEXT": TEXT,
     }
 
 
-if getUserOption("button font size") == "S":
+customfontsize = '''
+#defease, #ansbut,
+button[onclick*="ease1"]:not(#defease), 
+button[onclick*="ease2"]:not(#defease),
+button[onclick*="ease3"]:not(#defease),
+button[onclick*="ease4"]:not(#defease), 
+button[onclick*="edit"],
+button[onclick*="more"] { font-size: %spx; } 
+'''
+if getUserOption("button font size") == "l":
+    FONTSIZE = customfontsize % "20"
+elif getUserOption("button font size") == "m":
+    FONTSIZE = customfontsize % "16"
+if getUserOption("button font size") == "s":
     FONTSIZE = ""
-elif getUserOption("button font size") == "M":
-    FONTSIZE = '''
-    #defease, #ansbut,
-    button[onclick*="ease1"]:not(#defease), 
-    button[onclick*="ease2"]:not(#defease),
-    button[onclick*="ease3"]:not(#defease),
-    button[onclick*="ease4"]:not(#defease), 
-    button[onclick*="edit"],
-    button[onclick*="more"] { font-size: 16px; } 
-    '''
-elif getUserOption("button font size") == "L":
-    FONTSIZE = '''
-    #defease, #ansbut,
-    button[onclick*="ease1"]:not(#defease), 
-    button[onclick*="ease2"]:not(#defease),
-    button[onclick*="ease3"]:not(#defease),
-    button[onclick*="ease4"]:not(#defease), 
-    button[onclick*="edit"],
-    button[onclick*="more"] { font-size: 20px; } 
-    '''    
 
 
 #set font color (when background is colored the font must be black)
@@ -233,7 +220,8 @@ button[onclick*="more"] {
 }
 
 %(HOVEREFFECT)s
-%(FONTSIZE)s""" % {
+%(FONTSIZE)s
+""" % {
     "HEIGHT": HEIGHT,
     "BORDERRADIUS": BORDERRADIUS,
     "ANSWERWIDTH": ANSWERWIDTH,
