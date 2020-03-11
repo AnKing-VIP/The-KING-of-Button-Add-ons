@@ -1,80 +1,22 @@
-﻿"""
+﻿# -*- coding: utf-8 -*-
+
+"""
 This is a modification of the Answer Confirmation add-on for Anki by Albert Lyubarsky
 I do not take credit for any of the original code.
 
 License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
-
 """
-__version__ = "1.5"
 
+
+from anki.hooks import wrap
+import aqt
 from aqt.reviewer import Reviewer
-from aqt.utils import *
+from aqt.utils import tooltip
 from aqt import utils
 from aqt.qt import *
-import aqt
-from anki.hooks import wrap
 from .config import getUserOption
+from .nmcheck import isnightmode
 
-# init configuration
-Reviewer.colConfConf = aqt.mw.addonManager.getConfig(__name__)
-
-# custom method for deleting the tooltip, since there were problems
-# with the handling of global variables by an add-on
-def customCloseTooltip(tooltipLabel):
-    if tooltipLabel:
-        try:
-            tooltipLabel.deleteLater()
-        except:
-            # already deleted as parent window closed
-            pass
-        tooltipLabel = None
-utils.customCloseTooltip = customCloseTooltip
-
-# modified method to alter the background color of the tooltip label
-def tooltipWithColour(msg, color, x=0, y=20, xref=1, period=3000, parent=None, width=0, height=0):
-    global _tooltipTimer, _tooltipLabel
-    class CustomLabel(QLabel):
-        silentlyClose = True
-        def mousePressEvent(self, evt):
-            evt.accept()
-            self.hide()
-    closeTooltip()
-    aw = parent or aqt.mw.app.activeWindow() or aqt.mw
-    lab = CustomLabel("""\
-<center><table cellpadding=1>
-<tr>
-<td>%s</td>
-</tr>
-</table></center>""" % msg, aw)
-    lab.setFrameStyle(QFrame.Panel)
-    lab.setLineWidth(0)
-    lab.setWindowFlags(Qt.ToolTip)
-    
-    # adjust height if user configured custom height
-    
-    if (width>0):
-        lab.setFixedWidth(width)
-    if (height>0):
-        lab.setFixedHeight(height)
-    
-    p = QPalette()
-    p.setColor(QPalette.Window, QColor(color))
-    p.setColor(QPalette.WindowText, QColor("#000000"))
-    lab.setPalette(p)
-    lab.show()
-    lab.move(QPoint(x - int(round(lab.width() * 0.5 * xref, 0)), y))
-    
-    def handler():
-        customCloseTooltip(lab)
-    
-    t = QTimer(aqt.mw)
-    t.setSingleShot = True
-    t.timeout.connect(handler)
-    t.start(period)
-    
-    _tooltipLabel = lab
-
-utils.tooltipWithColour = tooltipWithColour
 
 # Ancillary answer card method to show the tooltip when user answered a card.
 # There have been compatibility issues with other add-ons, which override this method.
@@ -133,22 +75,10 @@ def answerCard_before(self, ease) :
     
     if (x1 < 0):
         x1 = 0
-    
     if (y < 0):
         y = 0
-    
-    # Nightmode
-    from anki import version as anki_version
-    old_anki = tuple(int(i) for i in anki_version.split(".")) < (2, 1, 20)
-    if old_anki:
-        class Object():
-            pass
-        theme_manager = Object()
-        theme_manager.night_mode = False
-    else:
-        from aqt.theme import theme_manager
 
-    if theme_manager.night_mode:
+    if isnightmode():
         AgainColor = getUserOption("Nightmode_AgainColor")
         HardColor = getUserOption("Nightmode_HardColor")
         GoodColor = getUserOption("Nightmode_GoodColor")
@@ -181,6 +111,7 @@ def answerCard_before(self, ease) :
         else:
             # default behavior for unforeseen cases
             tooltip(cB[0][1])
+
 
 if getUserOption("confirmation", True):
     Reviewer._answerCard  = wrap(Reviewer._answerCard, answerCard_before, "before")

@@ -7,9 +7,9 @@ Created by [The AnKing](https://www.ankingmed.com). If you enjoy this add-on or 
 
 * **Colors:** The color of the button text or background depending on what "button color" is set to
 * **button color:** set to "default", "hover" or "colors." 
-    * _Default-_ Text will be colored
-    * _Hover-_ Text will be colored and background will be colored on hover
-    * _Colors-_ Background will be colored
+    * _default_ - Text will be colored
+    * _hover_ - Text will be colored and background will be colored on hover
+    * _colors_ - Background will be colored
 
 * **answer button width:** ("Full" or "Normal") The width of the answer button. "Full" means it is big enough to cover the buttons
 * **border radius:** >0 will curve the edges of the buttons

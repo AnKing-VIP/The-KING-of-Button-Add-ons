@@ -1,33 +1,19 @@
 # -*- coding: utf-8 -*-
 
-# Created by: The AnKing
-### Website: https://www.ankingmed.com  (Includes 40+ recommended add-ons)
-### Youtube: https://www.youtube.com/theanking
-### Instagram/Facebook: @ankingmed
-### Patreon: https://www.patreon.com/ankingmed (Get individualized help)
-
 #TODO add font-weight? 
 
 from anki.hooks import wrap
 from aqt import mw
 from aqt.reviewer import Reviewer
-import os
-import shutil
-from .config import getUserOption
 
-# Nightmode
-from anki import version as anki_version
-old_anki = tuple(int(i) for i in anki_version.split(".")) < (2, 1, 20)
-if old_anki:
-    class Object():
-        pass
-    theme_manager = Object()
-    theme_manager.night_mode = False
-else:
-    from aqt.theme import theme_manager
+from .config import getUserOption
+from .nmcheck import isnightmode
+
 
 #Main config options
 BORDERRADIUS = getUserOption("border radius")
+
+
 if getUserOption("answer button width") == "Full":
     if getUserOption("button width") == "S":
         ANSWERWIDTH = 280
@@ -38,12 +24,14 @@ if getUserOption("answer button width") == "Full":
 else:
     ANSWERWIDTH = 120
 
+
 if getUserOption("button width") == "S":
     WIDTH = 42
 elif getUserOption("button width") == "M":
     WIDTH = 82
 elif getUserOption("button width") == "L":
     WIDTH = 122
+
 
 if getUserOption("button height") == "S":
     HEIGHT = 25
@@ -52,8 +40,10 @@ elif getUserOption("button height") == "M":
 elif getUserOption("button height") == "L":
     HEIGHT = 60
 
+
+# set background color of buttons
 if getUserOption("button color") == "colors":
-    if theme_manager.night_mode:
+    if isnightmode():
         AGAINBUTTON = getUserOption("Nightmode_AgainColor")
         HARDBUTTON = getUserOption("Nightmode_HardColor")
         GOODBUTTON = getUserOption("Nightmode_GoodColor")
@@ -64,7 +54,7 @@ if getUserOption("button color") == "colors":
         GOODBUTTON = getUserOption("GoodColor")
         EASYBUTTON = getUserOption("EasyColor")            
 else:
-    if theme_manager.night_mode:
+    if isnightmode():
         AGAINBUTTON = "inherit"
         HARDBUTTON = "inherit"
         GOODBUTTON = "inherit"
@@ -73,10 +63,13 @@ else:
         AGAINBUTTON = "#fff"
         HARDBUTTON = "#fff"
         GOODBUTTON = "#fff"
-        EASYBUTTON = "#fff"        
-#add hover effects
+        EASYBUTTON = "#fff"
+
+
+# add hover effects
+HOVEREFFECT = ""
 if getUserOption("button color") == "hover":
-    if theme_manager.night_mode:
+    if isnightmode():
         AGAINHOVER = getUserOption("Nightmode_AgainColor")
         HARDHOVER = getUserOption("Nightmode_HardColor")
         GOODHOVER = getUserOption("Nightmode_GoodColor")
@@ -91,35 +84,41 @@ if getUserOption("button color") == "hover":
         TEXT = "#c0c0c0"
         BACKGROUND = "#3a3a3a"         
                 
-    HOVEREFFECT = ('''
+    HOVEREFFECT = '''
     /* the "Good" button */  
     #defease:hover {
-        background-color: %s!important;
+        background-color: %(GOODHOVER)s!important;
         color: #3a3a3a!important;
     }    
     button[onclick*="ease1"]:not(#defease):hover {
-        background-color: %s!important;
+        background-color: %(AGAINHOVER)s!important;
         color: #3a3a3a!important;
     }   
     button[onclick*="ease2"]:not(#defease):hover {
-        background-color: %s!important;
+        background-color: %(HARDHOVER)s!important;
         color: #3a3a3a!important;        
     }  
     button[onclick*="ease3"]:not(#defease):hover,
     button[onclick*="ease4"]:not(#defease):hover {
-        background-color: %s!important;
+        background-color: %(EASYHOVER)s!important;
         color: #3a3a3a!important;
     }  
     /* the "Edit", "More" and "Answer" buttons */
     button[onclick*="edit"]:hover, 
     button[onclick*="more"]:hover,
     #ansbut:hover {
-        background-color: %s!important;
-        color: %s!important;
+        background-color: %(BACKGROUND)s!important;
+        color: %(TEXT)s!important;
     }    
-    ''' % (GOODHOVER, AGAINHOVER, HARDHOVER, EASYHOVER, BACKGROUND, TEXT))
-else:
-    HOVEREFFECT = ""
+    ''' % {
+        "GOODHOVER":GOODHOVER,
+        "AGAINHOVER":AGAINHOVER,
+        "HARDHOVER":HARDHOVER,
+        "EASYHOVER":EASYHOVER,
+        "BACKGROUND":BACKGROUND,
+        "TEXT":TEXT,
+    }
+
 
 if getUserOption("button font size") == "S":
     FONTSIZE = ""
@@ -144,112 +143,80 @@ elif getUserOption("button font size") == "L":
     button[onclick*="more"] { font-size: 20px; } 
     '''    
 
-#add colors to the text and black for 'colors' mode
-if getUserOption("button color") != "colors":
-    if theme_manager.night_mode:
+
+#set font color (when background is colored the font must be black)
+if getUserOption("button color") == "colors":
+    GOODCOLOR = AGAINCOLOR = HARDCOLOR = EASYCOLOR = "#3a3a3a"
+else:
+    if isnightmode():
         AGAINCOLOR = getUserOption("Nightmode_AgainColor")
         HARDCOLOR = getUserOption("Nightmode_HardColor")
         GOODCOLOR = getUserOption("Nightmode_GoodColor")
-        EASYCOLOR = getUserOption("Nightmode_EasyColor")      
+        EASYCOLOR = getUserOption("Nightmode_EasyColor")
     else:
         AGAINCOLOR = getUserOption("AgainColor")
         HARDCOLOR = getUserOption("HardColor")
         GOODCOLOR = getUserOption("GoodColor")
-        EASYCOLOR = getUserOption("EasyColor")            
-    CARDCOLOR = ('''
-    /* the "Good" button */
-    #defease {
-        color: %s!important;
-    }      
-    /* the "Again" button */
-    button[onclick*="ease1"]:not(#defease) {
-        color: %s!important;
-    }    
-    /* the "Hard" button */
-    button[onclick*="ease2"]:not(#defease) {
-        color: %s!important;  
-    }
-    /* the "Easy" button */
-    button[onclick*="ease3"]:not(#defease),
-    button[onclick*="ease4"]:not(#defease) {
-        color: %s!important;
-    }                     
-    ''' % (GOODCOLOR, AGAINCOLOR, HARDCOLOR, EASYCOLOR))
-else:
-    CARDCOLOR = '''
-    /* the "Good" button */
-    #defease {
-        color: #3a3a3a!important;
-    }      
-    /* the "Again" button */
-    button[onclick*="ease1"]:not(#defease) {
-        color: #3a3a3a!important;
-    }    
-    /* the "Hard" button */
-    button[onclick*="ease2"]:not(#defease) {
-        color: #3a3a3a!important; 
-    }           
-    /* the "Easy" button */
-    button[onclick*="ease3"]:not(#defease),
-    button[onclick*="ease4"]:not(#defease) {
-        color: #3a3a3a!important;
-    }      
-    '''
+        EASYCOLOR = getUserOption("EasyColor")
+
 
 #main css
-bottom_buttons_css = ('''
+bottom_buttons_css = """
 /* All buttons at the bottom of the review screen
    (including the "Edit" and "More" button) */
 button {
-    height: %spx;
+    height: %(HEIGHT)spx;
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: %spx!important;
+    border-radius: %(BORDERRADIUS)spx !important;
     -webkit-appearance: none;
     cursor: pointer;
     margin: 2px 6px 6px !important;
-    box-shadow: 0px 0px 1.5px .2px #000000!important;
-    -webkit-box-shadow: 0px 0px 1.5px .2px #000000!important;
+    box-shadow: 0px 0px 1.5px .2px #000000 !important;
+    -webkit-box-shadow: 0px 0px 1.5px .2px #000000 !important;
 }
 .nightMode button {
-    box-shadow: 0px 0px 2.5px .5px #000000!important;
-    -webkit-box-shadow: 0px 0px 2.5px .5px #000000!important;
-    background-color: #3a3a3a!important;
+    box-shadow: 0px 0px 2.5px .5px #000000 !important;
+    -webkit-box-shadow: 0px 0px 2.5px .5px #000000 !important;
+    background: #656565 !important;
 }
 
 /* the "Show Answer" button */
 #ansbut {
-    width: %spx !important;
+    width: %(ANSWERWIDTH)spx !important;
     text-align: center;
 }
 /* All rating buttons */
 #middle button {
-    width: %spx;
+    width: %(WIDTH)spx;
     text-align: center !important;
 }
 
 /* the "Good" button */
 #defease {
-    background-color: %s!important;
+    color: %(GOODCOLOR)s !important;
+    background-color: %(GOODBUTTON)s !important;
     text-align: center;
 }
 
 /* the "Again" button */
 button[onclick*="ease1"]:not(#defease) {
-    text-align: center;
-    background-color: %s!important;
+    color: %(AGAINCOLOR)s !important;
+    background-color: %(AGAINBUTTON)s !important;
     text-align: center;
 }
 
 /* the "Hard" button */
 button[onclick*="ease2"]:not(#defease) {
-    background-color: %s!important;
+    color: %(HARDCOLOR)s !important;
+    background-color: %(HARDBUTTON)s !important;
     text-align: center;
 }
 
 /* the "Easy" button */
 button[onclick*="ease3"]:not(#defease),
 button[onclick*="ease4"]:not(#defease) {
-    background-color: %s!important;
+    color: %(EASYCOLOR)s !important;
+    background-color: %(EASYBUTTON)s !important;
     text-align: center;
 }
 
@@ -264,10 +231,23 @@ button[onclick*="more"] {
     text-align: center;
 }
 
-%s
-%s
-%s
-''' % (HEIGHT, BORDERRADIUS, ANSWERWIDTH, WIDTH, GOODBUTTON, AGAINBUTTON, HARDBUTTON, EASYBUTTON, HOVEREFFECT, CARDCOLOR, FONTSIZE))
+%(HOVEREFFECT)s
+%(FONTSIZE)s""" % {
+    "HEIGHT": HEIGHT,
+    "BORDERRADIUS": BORDERRADIUS,
+    "ANSWERWIDTH": ANSWERWIDTH,
+    "WIDTH": WIDTH,
+    "GOODCOLOR": GOODCOLOR,
+    "AGAINCOLOR": AGAINCOLOR,
+    "HARDCOLOR": HARDCOLOR,
+    "EASYCOLOR": EASYCOLOR,
+    "GOODBUTTON": GOODBUTTON,
+    "AGAINBUTTON": AGAINBUTTON,
+    "HARDBUTTON": HARDBUTTON,
+    "EASYBUTTON": EASYBUTTON,
+    "HOVEREFFECT": HOVEREFFECT,
+    "FONTSIZE": FONTSIZE,
+}
 
 
 
@@ -277,6 +257,4 @@ js_append_css = f"$('head').append(`<style>{bottom_buttons_css}</style>`);"
 
 def reviewer_initWeb_wrapper(*args, **kwargs):
     mw.reviewer.bottom.web.eval(js_append_css)
-
-
 Reviewer._initWeb = wrap(Reviewer._initWeb, reviewer_initWeb_wrapper)
