@@ -12,4 +12,4 @@ def isnightmode():
     if old_anki:
         return False
     else:
-        return theme_manager
+        return theme_manager.night_mode
