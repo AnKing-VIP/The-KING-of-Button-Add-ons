@@ -18,7 +18,12 @@ def getUserOption(key = None, default = None):
     if key is None:
         return userOption
     if key in userOption:
-        return userOption[key]
+        val = userOption[key]
+        if isinstance(val, str):
+            return val.lower()
+        else:
+            return val
+        return 
     else:
         return default
 

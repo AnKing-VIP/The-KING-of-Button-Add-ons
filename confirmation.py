@@ -31,32 +31,32 @@ def answerCard_before(self, ease) :
     
 
     # determine the position for the label #idk why the +7 offset is needed, but only this brings exact values
-    if getUserOption("button width") == "S":
+    if getUserOption("button width") == "s":
         x1 = -125 + 7 + getUserOption("confirmation x-offset")
         x2 = -50 + 7 + getUserOption("confirmation x-offset")
         x3 = 25 + 7 + getUserOption("confirmation x-offset")
         x4 = 100 + 7 + getUserOption("confirmation x-offset")
         width = 62
-    elif getUserOption("button width") == "M":
+    elif getUserOption("button width") == "m":
         x1 = -162 + 7 + getUserOption("confirmation x-offset")
         x2 = -65.33 + 7 + getUserOption("confirmation x-offset")
         x3 = 31.33 + 7 + getUserOption("confirmation x-offset")
         x4 = 128 + 7 + getUserOption("confirmation x-offset")
         width = 87      
-    elif getUserOption("button width") == "L":
+    elif getUserOption("button width") == "l":
         x1 = -224 + 7 + getUserOption("confirmation x-offset")
         x2 = -88.66 + 7 + getUserOption("confirmation x-offset")
         x3 = 46.66 + 7 + getUserOption("confirmation x-offset")
         x4 = 182 + 7 + getUserOption("confirmation x-offset")
         width = 125                
 
-    if getUserOption("button height") == "S":   
+    if getUserOption("button height") == "s":   
         height = 26
         y = -36 - getUserOption("confirmation y-offset") 
-    elif getUserOption("button height") == "M":   
+    elif getUserOption("button height") == "m":   
         height = 41
         y = -51 - getUserOption("confirmation y-offset")  
-    elif getUserOption("button height") == "L":   
+    elif getUserOption("button height") == "l":   
         height = 61
         y = -71 - getUserOption("confirmation y-offset") 
 
@@ -73,10 +73,8 @@ def answerCard_before(self, ease) :
     
     y = aw.mapToGlobal(QPoint(0, y+aw.height())).y()
     
-    if (x1 < 0):
-        x1 = 0
-    if (y < 0):
-        y = 0
+    x1 = max(0, x1)
+    y = max(0, y)
 
     if isnightmode():
         AgainColor = getUserOption("Nightmode_AgainColor")
@@ -90,25 +88,36 @@ def answerCard_before(self, ease) :
         EasyColor = getUserOption("EasyColor")                        
 
     #set font size options
-    if getUserOption("button font size") == "S":
-        FONTSIZE = ""
-    elif getUserOption("button font size") == "M":
-        FONTSIZE = "font-size: 16px;"
-    elif getUserOption("button font size") == "L":
+    if getUserOption("button font size") == "l":
         FONTSIZE = "font-size: 20px;"
+    elif getUserOption("button font size") == "m":
+        FONTSIZE = "font-size: 16px;"
+    else:
+        FONTSIZE = ""
 
     # show tooltip in according color
     # if len(cB) > 0 : #save this line for testing purposes
+
+    def custom_tooltip_helper(label, color, xpos):
+        utils.tooltipWithColour("<div style='color:#3a3a3a;%s'>%s</div>" % (FONTSIZE, label),
+                                color,
+                                x=xpos,
+                                y=y,
+                                xref=xref,
+                                period=time,
+                                width=width,
+                                height=height)
+
     if self.state == "answer" and len(cB) > 0 :    
         # display the tooltip in an according color
-        if (cB[0][1]=="Again" or "Again" in cB[0][1]):
-            utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Again</div>" % (FONTSIZE)), AgainColor, x=x1, y=y, xref=xref, period=time, width=width, height=height)
-        elif (cB[0][1]=="Hard" or "Hard" in cB[0][1]):
-            utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Hard</div>" % (FONTSIZE)), HardColor, x=x2, y=y, xref=xref, period=time, width=width, height=height)
-        elif (cB[0][1]=="Good" or "Good" in cB[0][1]):
-            utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Good</div>" % (FONTSIZE)), GoodColor, x=x3, y=y, xref=xref, period=time, width=width, height=height)
-        elif (cB[0][1]=="Easy" or "Easy" in cB[0][1]):
-            utils.tooltipWithColour(("<div style='color:#3a3a3a;%s'>Easy</div>" % (FONTSIZE)), EasyColor, x=x4, y=y, xref=xref, period=time, width=width, height=height)
+        if "Again" in cB[0][1]:
+            custom_tooltip_helper("Again", AgainColor, x1)
+        elif "Hard" in cB[0][1]:
+            custom_tooltip_helper("Hard", HardColor, x2)
+        elif "Good" in cB[0][1]:
+            custom_tooltip_helper("Good", GoodColor, x3)
+        elif "Easy" in cB[0][1]:
+            custom_tooltip_helper("Easy", EasyColor, x4)
         else:
             # default behavior for unforeseen cases
             tooltip(cB[0][1])
