@@ -17,5 +17,6 @@
 	"confirmation time": 450,
 	"confirmation x-offset": 0,
 	"confirmation y-offset": 0,
+	"outline": "yes",
 	"style main screen buttons": true
 }

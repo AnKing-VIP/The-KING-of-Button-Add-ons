@@ -147,6 +147,10 @@ else:
         GOODCOLOR = getUserOption("GoodColor")
         EASYCOLOR = getUserOption("EasyColor")
 
+if getUserOption("outline") == "no":
+    OUTLINE = "outline:none;"
+else:
+    OUTLINE = ""    
 
 #main css
 bottom_buttons_css = """
@@ -161,6 +165,7 @@ button {
     margin: 2px 6px 6px !important;
     box-shadow: 0px 0px 1.5px .2px #000000 !important;
     -webkit-box-shadow: 0px 0px 1.5px .2px #000000 !important;
+    %(OUTLINE)s
 }
 .nightMode button {
     box-shadow: 0px 0px 2.5px .5px #000000 !important;
@@ -224,6 +229,7 @@ button[onclick*="more"] {
 """ % {
     "HEIGHT": HEIGHT,
     "BORDERRADIUS": BORDERRADIUS,
+    "OUTLINE": OUTLINE,
     "ANSWERWIDTH": ANSWERWIDTH,
     "WIDTH": WIDTH,
     "GOODCOLOR": GOODCOLOR,

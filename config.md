@@ -20,5 +20,6 @@ Created by [The AnKing](https://www.ankingmed.com). If you enjoy this add-on or 
 * **confirmation time:** How long the confirmation tooltip lasts
 * **confirmation x-offset:** (+ right, - left) X-offset for the confirmation tooltip 
 * **confirmation y-offset:** (+ up, - down) Y-offset for the confirmation tooltip (if you're using Progress Bar at the bottom, set this to 20)
+* **outline:** (yes or no) show the outline around the buttons when selected
 * **style main screen buttons:** (true or false) Style the buttons on the main screen in addition to the reviewer
 
