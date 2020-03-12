@@ -96,7 +96,6 @@ def answerCard_before(self, ease) :
         FONTSIZE = ""
 
     # show tooltip in according color
-    # if len(cB) > 0 : #save this line for testing purposes
 
     def custom_tooltip_helper(label, color, xpos):
         utils.tooltipWithColour("<div style='color:#3a3a3a;%s'>%s</div>" % (FONTSIZE, label),
@@ -108,6 +107,7 @@ def answerCard_before(self, ease) :
                                 width=width,
                                 height=height)
 
+  # if len(cB) > 0 : #save this line for testing purposes
     if self.state == "answer" and len(cB) > 0 :    
         # display the tooltip in an according color
         if "Again" in cB[0][1]:
