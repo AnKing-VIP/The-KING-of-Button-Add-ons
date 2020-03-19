@@ -1,7 +1,17 @@
+<div style="vertical-align:middle;"><a href="https://www.ankingmed.com"><img src="../../addons21/374005964/AnKing/AnKingSmall.png"></a><a href="https://www.ankingmed.com"><img src="../../addons21/374005964/AnKing/TheAnKing.png"></a></div>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/ankingmed"><img src="../../addons21/374005964/AnKing/Facebook.jpg"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.instagram.com/ankingmed"><img src="../../addons21/374005964/AnKing/Instagram.jpg"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.youtube.com/theanking"><img src="../../addons21/374005964/AnKing/YouTube.jpg"></a>
+
+<a href="https://www.patreon.com/ankingmed"><img src="../../addons21/374005964/AnKing/Patreon.jpg"></a>
+
+---
+
+<div style="color: #4297F9;"><b>If you enjoy this add-on or want individualized Anki help, please consider supporting us!</b></div>
+
 <div style="color: red; font-size: 16px; background-color: rgb(25, 25, 25); text-align: center;"><br>Restart is required for any change to take effect<br></div>
 <hr>
-
-Created by [The AnKing](https://www.ankingmed.com). If you enjoy this add-on or want individualized Anki help, please consider supporting us on **[Patreon](https://www.patreon.com/ankingmed)**, **[YouTube](https://www.youtube.com/theanking)** and **[Instagram](https://www.instagram.com/ankingmed)**/**[Facebook](https://www.facebook.com/ankingmed)** Thanks!
 
 ---
 
