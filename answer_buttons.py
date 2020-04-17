@@ -158,7 +158,8 @@ bottom_buttons_css = """
    (including the "Edit" and "More" button) */
 button {
     height: %(HEIGHT)spx;
-    border: solid 1px rgba(0, 0, 0, 0.2);
+    border: solid 1px rgba(100, 100, 100, 0.2)!important;
+    border-top: solid 0.5px #878787!important;  
     border-radius: %(BORDERRADIUS)spx !important;
     -webkit-appearance: none;
     cursor: pointer;
@@ -168,7 +169,7 @@ button {
     %(OUTLINE)s
 }
 .nightMode button {
-    box-shadow: 0px 0px 2.5px .5px #000000 !important;
+    box-shadow: 0px 0px 1.5px .5px #000000 !important;
     -webkit-box-shadow: 0px 0px 2.5px .5px #000000 !important;
     background: #3a3a3a !important;
 }
@@ -187,21 +188,21 @@ button {
 /* the "Good" button */
 #defease {
     color: %(GOODCOLOR)s !important;
-    background-color: %(GOODBUTTON)s !important;
+    background: %(GOODBUTTON)s !important;
     text-align: center;
 }
 
 /* the "Again" button */
 button[onclick*="ease1"]:not(#defease) {
     color: %(AGAINCOLOR)s !important;
-    background-color: %(AGAINBUTTON)s !important;
+    background: %(AGAINBUTTON)s !important;
     text-align: center;
 }
 
 /* the "Hard" button */
 button[onclick*="ease2"]:not(#defease) {
     color: %(HARDCOLOR)s !important;
-    background-color: %(HARDBUTTON)s !important;
+    background: %(HARDBUTTON)s !important;
     text-align: center;
 }
 
@@ -209,7 +210,7 @@ button[onclick*="ease2"]:not(#defease) {
 button[onclick*="ease3"]:not(#defease),
 button[onclick*="ease4"]:not(#defease) {
     color: %(EASYCOLOR)s !important;
-    background-color: %(EASYBUTTON)s !important;
+    background: %(EASYBUTTON)s !important;
     text-align: center;
 }
 

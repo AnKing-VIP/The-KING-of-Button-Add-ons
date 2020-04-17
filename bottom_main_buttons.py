@@ -38,7 +38,8 @@ if getUserOption("style main screen buttons", True):
     (including the "Edit" and "More" button) */
     button {
         height: 22px;
-        border: solid 1px rgba(0, 0, 0, 0.2);
+        border: solid 1px rgba(100, 100, 100, 0.2)!important;
+        border-top: solid 0.5px #878787!important;
         border-radius: %spx!important;
         -webkit-appearance: none;
         cursor: pointer;
@@ -49,7 +50,7 @@ if getUserOption("style main screen buttons", True):
     .nightMode button {
         box-shadow: 0px 0px 2.5px .5px #000000!important;
         -webkit-box-shadow: 0px 0px 2.5px .5px #000000!important;
-        background-color: #3a3a3a!important;
+        background: #3a3a3a!important;
     }
     %s
     </style> 
