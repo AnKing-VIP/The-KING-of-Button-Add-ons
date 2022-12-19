@@ -227,6 +227,12 @@ button[onclick*="more"] {
 
 %(HOVEREFFECT)s
 %(FONTSIZE)s
+
+/* The times are nested inside the answer buttons in 2.1.55+,
+   so the previous styles also apply to the text and it becomes unreadable in night mode */
+.nobold {
+    color: var(--fg, var(--text-fg));
+}
 """ % {
     "HEIGHT": HEIGHT,
     "BORDERRADIUS": BORDERRADIUS,
