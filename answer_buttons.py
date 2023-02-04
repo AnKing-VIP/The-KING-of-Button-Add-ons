@@ -157,7 +157,7 @@ bottom_buttons_css = """
 /* All buttons at the bottom of the review screen
    (including the "Edit" and "More" button) */
 button {
-    height: %(HEIGHT)spx;
+    height: 20px;
     border: solid 1px rgba(100, 100, 100, 0.2)!important;
     border-top: solid 0.5px #878787!important;  
     border-radius: %(BORDERRADIUS)spx !important;
@@ -166,6 +166,7 @@ button {
     margin: 2px 6px 6px !important;
     box-shadow: 0px 0px 1.5px .2px #000000 !important;
     -webkit-box-shadow: 0px 0px 1.5px .2px #000000 !important;
+    transform: translate(0, 5px);
     %(OUTLINE)s
 }
 .nightMode button {
