@@ -3,13 +3,13 @@
 
 #TODO add font-weight? 
 
-from anki.hooks import wrap
-from aqt import mw
-from aqt.reviewer import Reviewer
+from aqt import gui_hooks, appVersion
+from aqt.reviewer import ReviewerBottomBar
 
 from .config import getUserOption
 from .nmcheck import isnightmode
 
+ANKI_VERSION = tuple(int(p) for p in appVersion.split("."))
 
 #Main config options
 BORDERRADIUS = getUserOption("border radius")
@@ -251,15 +251,19 @@ button[onclick*="more"] {
     "FONTSIZE": FONTSIZE,
 }
 
+if ANKI_VERSION >= (2, 1, 57):
+    bottom_buttons_css += """
+.stat {
+    padding-top: 15px;
+}
+#middle td[align=center] {
+    padding-top: 15px;
+}
+"""
 
+def inject_styles(web_content, context):
+    if not isinstance(context, ReviewerBottomBar):
+        return
+    web_content.head += f"<style>{bottom_buttons_css}</style>"
 
-# add css
-js_append_css = f"$('head').append(`<style>{bottom_buttons_css}</style>`);"
-
-def reviewer_initWeb_wrapper(func):
-    def _initWeb(*args, **kwargs):
-        func(*args, **kwargs)
-        mw.reviewer.bottom.web.eval(js_append_css)
-    return _initWeb
-
-mw.reviewer._initWeb = reviewer_initWeb_wrapper(mw.reviewer._initWeb)
+gui_hooks.webview_will_set_content.append(inject_styles)
