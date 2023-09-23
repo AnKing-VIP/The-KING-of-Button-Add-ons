@@ -73,7 +73,6 @@ def answerCard_before(self, ease) :
     
     y = aw.mapToGlobal(QPoint(0, y+aw.height())).y()
     
-    x1 = max(0, x1)
     y = max(0, y)
 
     if isnightmode():
