@@ -35,9 +35,9 @@ def tooltipWithColour(msg, color, x=0, y=20, xref=1, period=3000, parent=None, w
 <td>%s</td>
 </tr>
 </table></center>""" % msg, aw)
-    lab.setFrameStyle(QFrame.Panel)
+    lab.setFrameStyle(QFrame.Shape.Panel)
     lab.setLineWidth(0)
-    lab.setWindowFlags(Qt.ToolTip)
+    lab.setWindowFlags(Qt.WindowType.ToolTip)
     
     # adjust height if user configured custom height
     
@@ -47,8 +47,8 @@ def tooltipWithColour(msg, color, x=0, y=20, xref=1, period=3000, parent=None, w
         lab.setFixedHeight(height)
     
     p = QPalette()
-    p.setColor(QPalette.Window, QColor(color))
-    p.setColor(QPalette.WindowText, QColor("#000000"))
+    p.setColor(QPalette.ColorRole.Window, QColor(color))
+    p.setColor(QPalette.ColorRole.WindowText, QColor("#000000"))
     lab.setPalette(p)
     lab.show()
     lab.move(QPoint(x - int(round(lab.width() * 0.5 * xref, 0)), y))
