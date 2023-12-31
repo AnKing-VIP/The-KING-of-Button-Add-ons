@@ -267,3 +267,5 @@ def inject_styles(web_content, context):
     web_content.head += f"<style>{bottom_buttons_css}</style>"
 
 gui_hooks.webview_will_set_content.append(inject_styles)
+gui_hooks.theme_did_change.append(inject_styles)
+
