@@ -56,32 +56,3 @@ def apply_bottom_main_buttons_styles():
 
 apply_bottom_main_buttons_styles()
 gui_hooks.theme_did_change.append(apply_bottom_main_buttons_styles)
-
-
-## If you want to style the "field" and "card" buttons in the editor, 
-## delete the ''' at the beginning and end of this section
-'''
-aqt.editor._html += 
-(""" 
-    <style> 
-    /* All buttons at the bottom of the review screen
-    (including the "Edit" and "More" button) */
-    button {
-        height: %spx;
-        border: solid 1px rgba(0, 0, 0, 0.2);
-        border-radius: %spx!important;
-        -webkit-appearance: none;
-        outline: none;
-        cursor: pointer;
-        margin: 2px 6px 6px !important;
-        box-shadow: 0px 0px 1.5px .2px #000000!important;
-        -webkit-box-shadow: 0px 0px 1.5px .2px #000000!important;
-    }
-    .nightMode button {
-        box-shadow: 0px 0px 2.5px .5px #000000!important;
-        -webkit-box-shadow: 0px 0px 2.5px .5px #000000!important;
-        background-color: #3a3a3a!important;
-    }
-    </style> 
-    """ % (HEIGHT, BORDERRADIUS))
-'''
