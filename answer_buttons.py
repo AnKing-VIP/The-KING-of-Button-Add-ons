@@ -185,7 +185,7 @@ def bottom_bar_styles() -> str:
     }
     /* All rating buttons */
     #middle button {
-        width: %(WIDTH)spx;
+        min-width: %(WIDTH)spx;
         text-align: center !important;
     }
 
