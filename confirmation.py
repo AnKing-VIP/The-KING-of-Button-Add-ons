@@ -8,27 +8,17 @@ License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 """
 
 
-from anki.hooks import wrap
 import aqt
-from aqt.reviewer import Reviewer
-from aqt.utils import tooltip
-from aqt import utils
+from aqt import utils, gui_hooks
 from aqt.qt import *
 from .config import getUserOption
 from .nmcheck import isnightmode
 
 
 # Ancillary answer card method to show the tooltip when user answered a card.
-# There have been compatibility issues with other add-ons, which override this method.
-
-def answerCard_before(self, ease) :
-    # get the ease which was selected
-    answerButtons = self._answerButtonList()
-    cB = [item for item in answerButtons if item[0] == ease] #cB: clickedButtons, should always be just one
-    
+def on_reviewer_did_answer_card(self, card, ease) :
     # load the display time
     time = getUserOption("confirmation time")
-    
 
     # determine the position for the label #idk why the +7 offset is needed, but only this brings exact values
     if getUserOption("button width") == "s":
@@ -106,22 +96,16 @@ def answerCard_before(self, ease) :
                                 width=width,
                                 height=height)
 
-  # if len(cB) > 0 : #save this line for testing purposes
-    if self.state == "answer" and len(cB) > 0 :    
-        # display the tooltip in an according color
-        if "Again" in cB[0][1]:
-            custom_tooltip_helper("Again", AgainColor, x1)
-        elif "Hard" in cB[0][1]:
-            custom_tooltip_helper("Hard", HardColor, x2)
-        elif "Good" in cB[0][1]:
-            custom_tooltip_helper("Good", GoodColor, x3)
-        elif "Easy" in cB[0][1]:
-            custom_tooltip_helper("Easy", EasyColor, x4)
-        else:
-            # default behavior for unforeseen cases
-            tooltip(cB[0][1])
+    # display the tooltip in an according color
+    if ease == 1:
+        custom_tooltip_helper("Again", AgainColor, x1)
+    elif ease == 2:
+        custom_tooltip_helper("Hard", HardColor, x2)
+    elif ease == 3:
+        custom_tooltip_helper("Good", GoodColor, x3)
+    elif ease == 4:
+        custom_tooltip_helper("Easy", EasyColor, x4)
 
 
 if getUserOption("confirmation", True):
-    Reviewer._answerCard  = wrap(Reviewer._answerCard, answerCard_before, "before")
-    Reviewer.CustomAnswerCard = answerCard_before
+    gui_hooks.reviewer_did_answer_card.append(on_reviewer_did_answer_card)
