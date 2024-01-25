@@ -28,7 +28,6 @@ def apply_bottom_main_buttons_styles():
         ''' % (BACKGROUND, TEXT))
     else:
         HOVEREFFECT = ""        
-    print(f"{HOVEREFFECT=}")
     if getUserOption("style main screen buttons", True):
         BottomBar._centerBody = (""" 
         <style> 

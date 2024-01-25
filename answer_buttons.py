@@ -276,4 +276,5 @@ def on_theme_did_change():
     mw.bottomWeb.eval("document.querySelector('#king-of-button-styles').textContent = %s;" % json.dumps(bottom_bar_styles()))
 
 gui_hooks.webview_will_set_content.append(on_webview_will_set_content)
-gui_hooks.theme_did_change.append(on_theme_did_change)
+if hasattr(gui_hooks, 'theme_did_change'):
+    gui_hooks.theme_did_change.append(on_theme_did_change)
