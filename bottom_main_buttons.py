@@ -54,4 +54,6 @@ def apply_bottom_main_buttons_styles():
         """ % (BORDERRADIUS, HOVEREFFECT)) + BottomBar._centerBody
 
 apply_bottom_main_buttons_styles()
-gui_hooks.theme_did_change.append(apply_bottom_main_buttons_styles)
+
+if hasattr(gui_hooks, 'theme_did_change'):
+    gui_hooks.theme_did_change.append(apply_bottom_main_buttons_styles)
