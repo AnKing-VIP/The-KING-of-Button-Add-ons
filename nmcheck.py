@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from anki import version as anki_version
+from anki.utils import pointVersion
 
-old_anki = tuple(int(i) for i in anki_version.split(".")) < (2, 1, 20)
+old_anki = pointVersion() < 20
 
 if not old_anki:
     from aqt.theme import theme_manager

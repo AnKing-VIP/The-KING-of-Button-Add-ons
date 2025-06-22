@@ -5,13 +5,11 @@
 
 import json
 from aqt import mw
-from aqt import gui_hooks, appVersion
+from aqt import gui_hooks
 from aqt.reviewer import ReviewerBottomBar
-
+from anki.utils import pointVersion
 from .config import getUserOption
 from .nmcheck import isnightmode
-
-ANKI_VERSION = tuple(int(p) for p in appVersion.split("."))
 
 
 def bottom_bar_styles() -> str:
@@ -255,7 +253,7 @@ def bottom_bar_styles() -> str:
         "FONTSIZE": FONTSIZE,
     }
 
-    if ANKI_VERSION >= (2, 1, 57):
+    if pointVersion() >= 57:
         bottom_buttons_css += """
     .stat {
         padding-top: 15px;
