@@ -55,13 +55,13 @@ def on_reviewer_did_answer_card(self, card, ease) :
     xref = 0
     
     # apply values
-    x1 = aw.mapToGlobal(QPoint(x1+int(round(aw.width()/2, 0)), 0)).x()
-    x2 = aw.mapToGlobal(QPoint(x2+int(round(aw.width()/2, 0)), 0)).x()
-    x3 = aw.mapToGlobal(QPoint(x3+int(round(aw.width()/2, 0)), 0)).x()
-    x4 = aw.mapToGlobal(QPoint(x4+int(round(aw.width()/2, 0)), 0)).x()        
+    x1 = aw.mapToGlobal(QPoint(int(x1+round(aw.width()/2, 0)), 0)).x()
+    x2 = aw.mapToGlobal(QPoint(int(x2+round(aw.width()/2, 0)), 0)).x()
+    x3 = aw.mapToGlobal(QPoint(int(x3+round(aw.width()/2, 0)), 0)).x()
+    x4 = aw.mapToGlobal(QPoint(int(x4+round(aw.width()/2, 0)), 0)).x()
     xref = 1
     
-    y = aw.mapToGlobal(QPoint(0, y+aw.height())).y()
+    y = aw.mapToGlobal(QPoint(0, int(y+aw.height()))).y()
     
     y = max(0, y)
 
